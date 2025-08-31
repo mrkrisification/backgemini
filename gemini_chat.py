@@ -9,7 +9,7 @@ MODEL = "gemini-2.5-flash-image-preview"
 client = genai.Client()
 chat = client.chats.create(model=MODEL)
 
-input_image_path = "Input_Images/1000025096.png"
+input_image_path = "Input_Images/badezimmer.jpg"
 image = Image.open(input_image_path)
 
 image_content = ["Describe this image.", image]
