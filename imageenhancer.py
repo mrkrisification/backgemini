@@ -15,6 +15,7 @@ class ImageEnhancer:
         self.description = None
         self.input_image = None
         self.output_image = None
+        self.chat = ImageEnhancer.Imagechat(self)
 
     def reset(self):
         self.__init__()
@@ -122,6 +123,23 @@ class ImageEnhancer:
 
         return png_bytes
 
+    #def create_chat(self):
+    #    self.chat = ImageEnhancer.Imagechat(self)
+
+
+    class Imagechat:
+        def __init__(self, outer):
+            self.ie = outer # to give access to the outer class
+            
+
+        def test_MIME(self):
+            mime = self.ie.get_mime_type(self.ie.input_image)
+            print(f"directly from outer:  {mime}")
+
+            #print(self.ie.input_image is self.input_image)
+
+        def testinner(self):
+            print("test inner")
 
 if __name__ == "__main__":
     ie = ImageEnhancer()
@@ -132,6 +150,8 @@ if __name__ == "__main__":
     
     print(type(image_bytes))
 
+    ie.set_input_image(image_bytes)
+    #ie.describe_image()
     #import magic
     #mime = magic.Magic(mime=True)
     #file_type = mime.from_buffer(image_bytes)
@@ -149,18 +169,22 @@ if __name__ == "__main__":
     #prompt = ie.make_image_update_prompt(user_input)
     #print(prompt)
 
-    ie.set_input_image(image_bytes)
-    prompt = """
-    Add country-style curtain panels ONLY on the left side of the window, made of light cotton or linen fabric with a striped pattern. Cozy farmhouse aesthetic.
-    """
-    result = ie.generate_image_update(prompt)
-    print(type(result))
-
-    ie.set_input_image(result)
-
-    prompt = """
-    Substitute the lamp in the corner, with a more fitting model.
-    """
     
-    result = ie.generate_image_update(prompt)
-    print(type(result))
+    #ie.set_input_image(image_bytes)
+    #prompt = """
+    #Add country-style curtain panels ONLY on the left side of the window, made of light cotton or linen fabric with a striped pattern. Cozy farmhouse aesthetic.
+    #"""
+    #result = ie.generate_image_update(prompt)
+    #print(type(result))
+
+    #ie.set_input_image(result)
+
+    #prompt = """
+    #Substitute the lamp in the corner, with a more fitting model.
+    #"""
+    
+    #result = ie.generate_image_update(prompt)
+    #print(type(result))
+    ie.chat.testinner()
+    
+    ie.chat.test_MIME()
